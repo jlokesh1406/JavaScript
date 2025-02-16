@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Move Box with Arrow Keys</title>
+    <style>
+        #EventListner3 {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            position: absolute; /* Added to allow movement */
+            top: 50px; /* Initial position */
+            left: 50px; /* Initial position */
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="EventListner3">
+        Move Me
+    </div>
+    <a href="../Main/js1.html" style="text-decoration: none;">Back To Home</a>
+
+    <script>
+        const EventListner3 = document.getElementById("EventListner3");
+        let moveamount = 10;
+        let x = 50; // Start at 50px
+        let y = 50;
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key.startsWith("Arrow")) {
+                switch (event.key) {
+                    case "ArrowUp":
+                        y -= moveamount;
+                        break;
+                    case "ArrowDown":
+                        y += moveamount;
+                        break;
+                    case "ArrowLeft":
+                        x -= moveamount;
+                        break;
+                    case "ArrowRight":
+                        x += moveamount;
+                        break;
+                }
+                EventListner3.style.top = `${y}px`;
+                EventListner3.style.left = `${x}px`;
+            }
+        });
+    </script>
+</body>
+</html>

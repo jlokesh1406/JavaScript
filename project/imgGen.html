@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Search Engine</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 50%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            margin-left: 10px;
+            background: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: darkgreen;
+        }
+
+        #imageResults {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .image-container {
+            margin: 10px;
+        }
+
+        .image-container img {
+            width: 250px;
+            height: 200px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Image Search Engine</h1>
+    <input type="text" id="searchInput" placeholder="Search for images...">
+    <button onclick="searchImages()">Search</button>
+
+    <div id="imageResults"></div>
+
+    <script>
+        async function searchImages() {
+
+            //https://unsplash.com/developers
+
+            let query = document.getElementById("searchInput").value;
+            let apiKey = "YeqjflXNtGqmtJnGus9-2aqod6vhfl0w8rJPmNMxfOE"; // Replace with your Unsplash API Key
+            let url = `https://api.unsplash.com/search/photos?query=${query}&client_id=${apiKey}`;
+
+            let response = await fetch(url);
+            let data = await response.json();
+
+            let imageResults = document.getElementById("imageResults");
+            imageResults.innerHTML = "";
+
+            data.results.forEach(image => {
+                let imageContainer = document.createElement("div");
+                imageContainer.classList.add("image-container");
+
+                let img = document.createElement("img");
+                img.src = image.urls.small;
+                img.alt = image.alt_description;
+
+                imageContainer.appendChild(img);
+                imageResults.appendChild(imageContainer);
+            });
+        }
+    </script>
+
+</body>
+</html>

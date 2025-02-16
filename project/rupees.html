@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body
+        {
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(to right ,rgb(44, 243, 44),rgba(146, 219, 68, 0.753)
+            );
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #container
+        {
+            width: 40%;
+            height: 200px;
+            background-color: rgb(170, 126, 126);
+            border-radius: 20px;
+        }
+        #container div 
+        {
+            padding: 10px;
+            text-align: center;
+        }
+        input 
+        {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="container">
+        <div>
+            <label>currency converter</label>
+        </div>
+        <div>
+            <input type="number" id="input" min="1" value="0">
+        </div>
+        <div>
+            <input type="radio" name="card" id="RD" >
+            <label >Rupees to Dollar</label>
+            <input type="radio" name="card" id="DR">
+            <label >Dollar to Rupees</label>
+        </div>
+        <div>
+            <button type="button" id="submit">submit</button>
+        </div>
+        <div>
+            <label id="result">Result: </label>
+            <br><br>
+            <a href="../Main/js1.html">back</a>
+        </div>
+    </div>
+
+    <script>
+        let input=document.getElementById("input");
+        let RD=document.getElementById("RD");
+        let DR=document.getElementById("DR");
+        let submit=document.getElementById("submit");
+        let result=document.getElementById("result");
+
+        submit.onclick=function(){
+            if(RD.checked)
+            {
+                result.textContent+=(Number(input.value))*86+" "+" USD";
+            }
+            else if(DR.checked)
+            {
+                result.textContent+=(Number(input.value))%86+" "+" INR";
+            }
+        }
+
+    </script>
+
+
+</body>
+</html>

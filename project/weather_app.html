@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body 
+        {
+            background-color: rgb(51, 50, 50);
+        }
+        .card 
+        {
+            width: 90%;
+            max-width: 470px;
+            background: linear-gradient(92deg,rgb(78, 72, 241),rgb(39, 153, 206));
+            color: chartreuse;
+            margin: 100px auto 0;
+            border-radius: 20px;
+            padding: 40px 35px;
+            text-align: center;
+        }
+        .search 
+        {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .search input 
+        {
+            border: 0;
+            outline: 0;
+            background-color: aliceblue;
+            color: black;
+            padding: 10px 25px;
+            height: 60px;
+            border-radius: 30px;
+            flex: 1;
+            margin-right: 16px;
+            font-size: 18px;
+        }
+        .search button 
+        {
+            border: 0;
+            outline: 0;
+            background-color: aliceblue;
+            color: black;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+        }
+        .search button img 
+        {
+            width: 16px;
+        }
+        .weather-icon 
+        {
+            width: 170px;
+            margin-top: 30px;
+        }
+        .weather h1 
+        {
+            font-size: 80px;
+            font-weight: 500;
+        }
+        .weather h2 
+        {
+            font-size: 45px;
+            font-weight: 300;
+            margin-top: -10px;
+        }
+        .details 
+        {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            margin-top: 50px;
+        }
+        .col 
+        {
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+        .col img 
+        {
+            width: 40px;
+            margin-right: 10px;
+        }
+        .humidity ,.wind
+        {
+            font-size: 28px;
+        }
+        .error 
+        {
+            margin-left: -250px;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="search">
+            <input type="text" id="input" placeholder="Enter city name" spellcheck="false">
+            <button><img src="../img/weather_app_img/images/search.png" alt="search_img"></button>
+        </div>
+        <div class="error">
+            <p> invalid city name </p>
+        </div>
+        <div class="weather">
+            <img src="../img/weather_app_img/images/rain.png" class="weather-icon">
+            <h1 class="temp">22`C</h1>
+            <h2 class="city">Zoho chennai</h2>
+            <div class="details">
+                <div class="col">
+                    <img src="../img/weather_app_img/images/humidity.png" alt="">
+                    <div>
+                        <p class="humidity">50%</p>
+                        <p>humidity</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="../img/weather_app_img/images/wind.png" alt="">
+                    <div>
+                        <p class="wind">50km/hr</p>
+                        <p>wind speed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const apikey="d12be84c00f4a17f6c4638b7d6d596ef";
+        const apiurl="https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+        const searchbox = document.querySelector(".search input");
+        const searchbtn = document.querySelector(".search button");
+        const weather_icon = document.querySelector(".weather-icon");
+
+        async function cheachWeather(city)
+        {
+            const response = await fetch(apiurl+city+`&appid=${apikey}`);
+            if(response.status==404)
+            {
+                document.querySelector(".error").style.display="block";
+                document.querySelector(".weather").style.display="none";
+                return;
+            }
+            else 
+            {
+                var data = await response.json();
+                console.log(data);
+            
+                /*
+                {
+                    "coord": {
+                        "lon": 77.8667,
+                        "lat": 9.1667
+                    },
+                    "weather": [
+                        {
+                            "id": 802,
+                            "main": "Clouds",
+                            "description": "scattered clouds",
+                            "icon": "03d"
+                        }
+                    ],
+                    "base": "stations",
+                    "main": {
+                        "temp": 24.66,
+                        "feels_like": 24.77,
+                        "temp_min": 24.66,
+                        "temp_max": 24.66,
+                        "pressure": 1014,
+                        "humidity": 61,
+                        "sea_level": 1014,
+                        "grnd_level": 1002
+                    },
+                    "visibility": 10000,
+                    "wind": {
+                        "speed": 2.19,
+                        "deg": 19,
+                        "gust": 2.86
+                    },
+                    "clouds": {
+                        "all": 36
+                    },
+                    "dt": 1739675842,
+                    "sys": {
+                        "country": "IN",
+                        "sunrise": 1739668044,
+                        "sunset": 1739710686
+                    },
+                    "timezone": 19800,
+                    "id": 1265891,
+                    "name": "Kovilpatti",
+                    "cod": 200
+                }
+                */
+
+                document.querySelector(".city").innerHTML=data.name;
+                document.querySelector(".temp").innerHTML=data.main.temp+"`c";
+                document.querySelector(".humidity").innerHTML=data.main.humidity+" %";
+                document.querySelector(".wind").innerHTML=data.wind.speed+" km/hr";
+                if(data.weather[0].main=="Clouds")
+                {
+                    weather_icon.src="../img/weather_app_img/images/clouds.png";   
+                }
+                else if(data.weather[0].main=="Clear")
+                {
+                    weather_icon.src="../img/weather_app_img/images/clear.png";   
+                }
+                else if(data.weather[0].main=="Rain")
+                {
+                    weather_icon.src="../img/weather_app_img/images/rain.png";   
+                }
+                else if(data.weather[0].main=="Drizzle")
+                {
+                    weather_icon.src="../img/weather_app_img/images/drizzle.png";   
+                }
+                else if(data.weather[0].main=="Mist")
+                {
+                    weather_icon.src="../img/weather_app_img/images/mist.png";   
+                }
+
+
+                }
+                document.querySelector(".error").style.display="none";
+                document.querySelector(".weather").style.display="block";
+            }
+            
+            searchbtn.addEventListener("click",()=> 
+            {
+                cheachWeather(searchbox.value);
+            });
+    </script>
+</body>
+</html>

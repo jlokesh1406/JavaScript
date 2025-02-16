@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body 
+        {
+            background-image:url('../img/20220816_164013.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;  
+            background-size: cover; 
+        }
+        #id1 
+        {
+            display: flex;
+            text-align: center;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #id2 
+        {
+            font-size: 100px;
+            color: rgb(255, 255, 255);
+            background-color: rgba(155, 151, 151, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div id="id1">
+        <div id="id2">00:00</div>
+        <h1><a href="../Main/js1.html">Back to Home</a></h1>
+    </div>
+
+    <script>
+          function updateclock()
+            {
+                let now = new Date();
+                let h = now.getHours().toString().padStart(2,0);
+                let m = now.getMinutes().toString().padStart(2,0);
+                let s = now.getSeconds().toString().padStart(2,0);
+                let apm=h>=12?"PM":"AM";
+                h=h%12||12; // 1 to 12
+                h=h.toString().padStart(2,0);
+                let timeString = `${h}:${m}:${s} ${apm}`;
+                document.getElementById("id2").textContent = timeString;
+            }
+            updateclock();
+            setInterval(updateclock,1000);
+    </script>
+</body>
+</html>

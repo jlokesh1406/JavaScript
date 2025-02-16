@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body
+        {
+            background-color: blanchedalmond;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        div 
+        {
+            width: 400px;
+            background-color: rgb(6, 229, 3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            border-radius: 50px;
+            
+        }
+        div div
+        {
+            display: flex;
+            flex-direction: row;
+        }
+        #h1 
+        {
+            font-size: 50px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: bolder;
+            color: aliceblue;
+        }
+        button 
+        {
+            width: 50%;
+            height: 50px;
+            border-radius: 0px 0px 10px 10px;
+            margin-left: 10px;
+            border-color: wheat;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 25px;
+            background-color: black;
+            color: #ffffff;
+            outline-color: black;
+            
+        }
+        button:hover 
+        {
+            background-color: #ffffff;
+            color: black;
+            /* transform: skew(4deg, 1deg);
+            transition: all 0.7s ease-in-out; */
+        }
+        </style>
+</head>
+<body>
+    
+    <div>
+        <label id="h1">0</label>
+        <div>
+            <button type="button" id="Decreasebtn">Decrease</button>
+            <button type="button" id="Resetbtn">Reset</button>
+            <button type="button" id="Increasebtn">Increase</button>
+        </div>
+        <div>
+            <a href="../Main/js1.html">Back</a>
+        </div>
+    </div>
+    <script>
+        
+        let des=document.getElementById("Decreasebtn");
+        let res=document.getElementById("Resetbtn");
+        let inc=document.getElementById("Increasebtn");
+        let label=document.getElementById("h1");
+        let count=0;
+        des.onclick = function(){
+            count--;
+            label.textContent=count;
+        }
+        inc.onclick=function(){
+            count++;
+            label.textContent=count;
+        }
+        res.onclick=function(){
+            count=0;
+            label.textContent=count;
+        }
+
+    </script>
+</body>
+</html>

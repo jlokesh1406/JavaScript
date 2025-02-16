@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: linear-gradient(to right, red, yellow, red);
+        }
+        img {
+            width: 400px;
+            height: 200px;
+            display: inline;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        a
+        {
+            position: relative;
+            top: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div>
+            <img src="../img/20220816_164013.jpg" alt="img" id="img">
+        </div>
+        <div>
+            <button type="button" id="btn">HIDE</button>
+        </div>
+        <div>
+            <a href="../Main/js1.html">Back to Home page</a>
+        </div>
+        
+    </div>
+
+    <script>
+        let btn = document.getElementById("btn");
+        let img = document.getElementById("img");
+
+        btn.addEventListener("click", () => {
+            if (img.style.display === "none") {
+                img.style.display = "inline";
+                btn.textContent = "HIDE";
+            } else {
+                img.style.display = "none";
+                btn.textContent = "SHOW";
+            }
+        });
+    </script>
+
+</body>
+</html>

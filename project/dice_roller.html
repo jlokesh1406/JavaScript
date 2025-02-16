@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roller</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            flex-wrap: wrap;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        #inputpart {
+            margin: 10%;
+        }
+        label, button, input {
+            width: 200px;
+            margin: 5px;
+            padding: 5px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        #dices_img img {
+            width: 50px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="inputpart">
+            <label>Enter Dice Count</label>
+            <input type="number" id="input" value="1" min="1" max="6" required> 
+            <button type="button" id="sumbit">Submit</button>
+        </div>
+
+        <div id="result_tol"></div>
+        <div id="dices_img"></div>
+        <a href="../Main/js1.html" style="text-decoration: none;">Back to Home</a>
+    </div>
+
+    <script>
+        let btn = document.getElementById("sumbit");
+
+        btn.onclick = function() {
+            let numberofdice = parseInt(document.getElementById("input").value);
+            let result_tol = document.getElementById("result_tol");
+            let dices_img = document.getElementById("dices_img");
+
+            let values = [];
+            let images = [];
+
+            for (let i = 0; i < numberofdice; i++) {
+                let diceValue = Math.floor(Math.random() * 6) + 1;
+                values.push(diceValue);
+                images.push(`<img src="../img/${diceValue}.png">`);
+            }
+
+            result_tol.textContent = `Dice: ${values.join(", ")}`;
+            dices_img.innerHTML = images.join("\n");
+        };
+    </script>
+
+</body>
+</html>
